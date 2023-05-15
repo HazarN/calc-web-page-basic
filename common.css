@@ -16,14 +16,14 @@ body {
     justify-content: center;
 }
 
-/*Calculator's size*/
+
 .calculator {
     height: 400px;
     width: 360px;
 }
 
-/*Header part*/
-.head-container{
+
+.header-container{
     display: flex;
     justify-content: space-between;
 
