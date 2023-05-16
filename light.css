@@ -10,12 +10,12 @@
     background-color: #74C1F0;
 }
 
-.btn {
+button {
     background-color: #CCCCCC;
 }
-.btn:hover {
+button:hover {
     background-color: #666666;
 }
-.btn-equal {
+.equals {
     background-color: #74C1F0;
 }

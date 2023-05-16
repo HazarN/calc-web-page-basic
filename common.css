@@ -60,7 +60,7 @@ body {
 }
 
 /*Default button displaying*/
-.btn {
+.keypad-container > button {
     padding: 0;
     font-weight: 700;
 
