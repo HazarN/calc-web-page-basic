@@ -1,6 +1,3 @@
-const themeSwitcher = document.querySelector('.fa-arrow-rotate-right');
-themeSwitcher.addEventListener('click', switchTheme);
-
 function switchTheme() {
     const theme = document.querySelector('#themeRef');
     const icon  = document.querySelector('#theme');
@@ -17,3 +14,6 @@ function switchTheme() {
         icon.classList.add('fa-sun');
     }
 }
+
+const themeSwitcher = document.querySelector('.fa-arrow-rotate-right');
+themeSwitcher.addEventListener('click', switchTheme);
