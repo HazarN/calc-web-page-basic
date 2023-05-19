@@ -1,3 +1,4 @@
+// Theme switcher event handler for light and dark mode
 function switchTheme() {
     const theme = document.querySelector('#themeRef');
     const icon  = document.querySelector('#theme');

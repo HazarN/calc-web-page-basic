@@ -13,11 +13,10 @@ const buttons = document.querySelectorAll('.keypad-container button');
 const result = document.querySelector('#result');
 const memory = document.querySelector('#memory');
 
-result.innerHTML = '0';                                                        // Initial screen displays zero(0)
+result.innerHTML = '0';                                                    // Initial screen displays zero(0)
 
-let nextState = State.S0;                                                       // Initial state
-
-// Tracing the buttons
+// Button tracing with state transition
+let nextState = State.S0;                                                  // Initial state is S0                                                      
 buttons.forEach(button => {                                                  
 
     button.addEventListener('click', (event) => {
@@ -25,12 +24,11 @@ buttons.forEach(button => {
     });
 });                                            
 
-// Button interrupt handler also returns the next state information
+// Button interrupt handler, also returns the next state information
 function clickHandler(event, state) {
     const button      = event.target;
     const buttonValue = button.textContent;
 
-    // FIXME: Improve the code below
     switch (state) {
         case State.S0:
             console.log('State: S0');
@@ -73,7 +71,6 @@ function clickHandler(event, state) {
 
                 state = State.S2;
             }
-
 
             return state;
         case State.S2:
