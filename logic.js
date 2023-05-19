@@ -1,9 +1,9 @@
 // Calculator will be implemented based on this four states.
 const State = {
-    S0: 0, //
-    S1: 1, //
-    S2: 2, //
-    S3: 3, //
+    S0: 0, 
+    S1: 1,
+    S2: 2,
+    S3: 3,
 };
 
 // Keypad html element
@@ -13,14 +13,15 @@ const buttons = document.querySelectorAll('.keypad-container button');
 const result = document.querySelector('#result');
 const memory = document.querySelector('#memory');
 
-result.innerHTML = '0';                                                 // Initial screen displays zero(0)
+result.innerHTML = '0';                                                        // Initial screen displays zero(0)
+
+let nextState = State.S0;                                                       // Initial state
 
 // Tracing the buttons
-buttons.forEach(button => {
-    let prevState = State.S0;                                               // Initial state
+buttons.forEach(button => {                                                  
 
     button.addEventListener('click', (event) => {
-        let nextState = clickHandler(event, prevState)                              // State transition with click event
+        nextState = clickHandler(event, nextState)                         // State transition with click event
     });
 });                                            
 
@@ -28,10 +29,12 @@ buttons.forEach(button => {
 function clickHandler(event, state) {
     const button      = event.target;
     const buttonValue = button.textContent;
-    
+
     // FIXME: Improve the code below
     switch (state) {
         case State.S0:
+            console.log('State: S0');
+
             if (button.classList.contains('clear')) {
                 result.innerHTML = '0';
                 memory.innerHTML = '';
@@ -52,6 +55,8 @@ function clickHandler(event, state) {
 
             return state;
         case State.S1:
+            console.log('State: S1');
+
             if (button.classList.contains('clear')) {
                 result.innerHTML = '0';
                 memory.innerHTML = '';
@@ -61,22 +66,55 @@ function clickHandler(event, state) {
                 result.innerHTML += buttonValue;
 
                 state = State.S1;
+            } else if (button.classList.contains('operator')) {
+                memory.innerHTML = result.innerHTML + buttonValue;
+                
+                console.log(buttonValue);
+
+                state = State.S2;
             }
+
 
             return state;
         case State.S2:
+            console.log('State: S2');
+
             if (button.classList.contains('clear')) {
                 result.innerHTML = '0';
                 memory.innerHTML = '';
 
                 state = State.S0;
+            } else if (button.classList.contains('number')) {
+                result.innerHTML = '';
+                result.innerHTML = buttonValue;
+
+                state = State.S3;
             }
 
             return state;
         case State.S3:
+            console.log('State: S3');
+
             if (button.classList.contains('clear')) {
                 result.innerHTML = '0';
                 memory.innerHTML = '';
+
+                state = State.S0;
+            } else if (button.classList.contains('number')) {
+                result.innerHTML += buttonValue;
+
+                state = State.S3;
+            } else if (button.classList.contains('operator')) {
+                state = State.S2;
+            } else if (button.classList.contains('equals')) {
+
+                calc = eval(memory.innerHTML + result.innerHTML);
+                
+                if (calc == Infinity) {
+                    calc = 'Error';
+                }
+
+                result.innerHTML = calc.toPrecision(5);
 
                 state = State.S0;
             }
