@@ -105,6 +105,10 @@ function clickHandler(event, state) {
                 if (calc == Infinity) {
                     calc = 'Error';
                 }
+                
+                if (typeof calc === 'number' && !Number.isNaN(calc) && !Number.isInteger(calc)) {
+                    calc = calc.toPrecision(8);
+                }
 
                 result.innerHTML = calc;
                 memory.innerHTML = '';
